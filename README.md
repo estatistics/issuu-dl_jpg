@@ -1,36 +1,24 @@
 # issuu-dl
 
 issuu-dl downloads documents from [issuu.com](https://issuu.com). It downloads
-the document's pages in the jpg format and saves those in /tmp to some temporary
-directory. The images are not deleted. The images are then converted to a pdf
-and it will be saved in the current directory and named by the title of the
-document.
+the document's pages in the jpg format under the title of the document.The document 
+remains in numbered jpg format and it is not converted into PDF. 
 
 ## Usage
 
 ```
-./issuu-dl <url of the magazine/book on issuu.com>
+./issuu-dl_jpg <whole url of the magazine/book on issuu.com>
 ```
 
-The URL needs to be for the whole document, for example
-[https://issuu.com/jmadler/docs/modern_perl](https://issuu.com/jmadler/docs/modern_perl),
-not anything else, like not a URL for a single page.
+## Information
 
-You might need to change a couple of ImageMagick policies. The file is
-/etc/ImageMagick-6/policy.xml in Linux.
+- It downloads the document as numbered jpg files under the title of the document and remains as such,
+  it is not converted into pdf (for better quality - management).
+- Title is not entirely "cleared" of html artifacts
+- It will retry to download pages if internet is disconnected
+- you may check wget if you need extra control options 
 
-Uncomment this one or set to rights="read|write".
-
-```
-<policy domain="coder" rights="none" pattern="PDF" />
-```
-
-Set disk cache usage higher, I set it to 8GiB here.
-
-```
-<policy domain="resource" name="disk" value="8GiB"/>
-```
 
 ## Dependencies
 
-wget, ImageMagick (convert).
+wget, grep, sed 
