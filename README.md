@@ -1,6 +1,6 @@
 # issuu-dl_jpg
 
-issuu-dl downloads documents from [issuu.com](https://issuu.com). It downloads
+issuu-dl_jpg downloads documents from [issuu.com](https://issuu.com). It downloads
 the document's pages in the jpg format under the title of the document.The document 
 remains in numbered jpg format and it is not converted into PDF. 
 
