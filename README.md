@@ -20,7 +20,8 @@ example:
   it is not converted into pdf (for better quality - management).
 - Title is not entirely "cleared" of html artifacts
 - It will retry to download pages if internet is disconnected
-- you may check wget if you need extra control options 
+- you may check `man wget` and tweak it inside issuu_dl_jpg.sh
+  if you need extra control options of downloading
 
 
 ## Dependencies
