@@ -44,10 +44,6 @@ mkdir "${title1}"
 
 for ((i = 1; i <= page_count; i++)); do
     foo=$(printf "%04d" ${i});
-    wget  --limit-rate=800k  --retries -1 --http-timeout 120 --output-document="$title1/"${foo}".jpg" \
+    wget  --limit-rate=800k  --retry-connrefused  --waitretry=1  --read-timeout=20 --tries=0 --output-document="$title1/"${foo}".jpg" \
         "https://image.issuu.com/${revision_id}-${publication_id}/jpg/page_${i}.jpg" 
 done
-
-
-
-
