@@ -1,10 +1,16 @@
 #!/usr/bin/env bash
 # updated 04FEB2024
 
-html=$(wget --quiet --output-document=- "$1")
-html0=$(echo "$html" | echo $html | grep -oE "pageCount.*more" | sed -re "s/\&quot.//g" )
+if (curl -s ifconfig.co > /dev/null;) then  
+	html=$(wget --quiet --retry-connrefused  --waitretry=1  --read-timeout=20 --tries=0 --output-document=- "$1")
+	html0=$(echo "$html" | echo $html | grep -oE "pageCount.*more" | sed -re "s/\&quot.//g" )
+	echo $html0
+	else     
+	echo "1"; sleep 10
+fi
 
-echo $html0
+
+
 
 page_count=$(echo "$html0" |\
     grep --only-matching --perl-regexp 'pageCount:\K\d+')
@@ -32,9 +38,8 @@ title0=$(echo "$html" |\
     grep --only-matching --perl-regexp 'title&quot;:&quot;\K.*?(?=&quot;)')
 [[ -z $title ]] && title=issuu
 
-title1=$(echo $html | grep -ohE ".{0}title>.{230}" |  grep -oh ">.*by.*Issuu" | sed "s/>//");
+title1=$(echo $html | grep -ohE ".{0}title>.{230}" |  grep -oh ">.*by.*Issuu" | sed "s/>//" | sed "s/\//-/g" | sed "s/amp;//g");
 [[ -z $title ]] && title=issuu
-
 
 echo $title1
 
@@ -47,3 +52,9 @@ for ((i = 1; i <= page_count; i++)); do
     wget  --limit-rate=800k  --retry-connrefused  --waitretry=1  --read-timeout=20 --tries=0 --output-document="$title1/"${foo}".jpg" \
         "https://image.issuu.com/${revision_id}-${publication_id}/jpg/page_${i}.jpg" 
 done
+
+echo "--------------------------------------------------------------------------";
+numb_files="$(ls "${title1}" | wc -l)";
+echo "title: $title1";
+echo "the number of jpg files that were downloaded are: $numb_files";
+echo "while it was counted that online exists: $page_count";
