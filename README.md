@@ -7,7 +7,11 @@ remains in numbered jpg format and it is not converted into PDF.
 ## Usage
 
 ```
-./issuu-dl_jpg <whole url of the magazine/book on issuu.com>
+chmod +x ./issuu-dl_jpg.sh (to make it executable) and then 
+./issuu-dl_jpg.sh  <whole url of the magazine/book on issuu.com>
+
+example:
+./issuu-dl_jpg.sh   https://issuu.com/user/docs/history_of_world
 ```
 
 ## Information
