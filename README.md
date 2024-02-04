@@ -19,6 +19,7 @@ example:
 - It downloads the document as numbered jpg files under the title of the document and remains as such,
   it is not converted into pdf (for better quality - management).
 - It will retry to download pages if internet is disconnected
+- The download speed is limited to 800kb.
 - you may check `man wget` and tweak it inside issuu_dl_jpg.sh
   if you need extra control options of downloading
 
